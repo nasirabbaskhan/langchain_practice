@@ -20,7 +20,6 @@ llm = ChatGoogleGenerativeAI(
     temperature=0.2
 )
 
-# data indexing
 loader = PyPDFLoader("./research.pdf")
 docs = loader.load()
 
@@ -33,7 +32,7 @@ vector = FAISS.from_documents(documents, embedding=embedding)
 retriever = vector.as_retriever()
 
 
-
+# prompt with user's question and retriever's response from vectorstores and both will pass to llm to get final response
 prompt = ChatPromptTemplate.from_template(
     """
     Answer the question based on the provided context only with detailed explination.
